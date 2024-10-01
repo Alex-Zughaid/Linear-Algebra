@@ -1,5 +1,7 @@
 public class Demo {
     public static void main(String[] args) throws Exception {
+        System.out.println("A demo for how to use the Matrix class");
+        
         Matrix I7 = new Matrix(7);
         double[][] I7vals = {{1,0,0,0,0,0,0}, {0,1,0,0,0,0,0}, {0,0,1,0,0,0,0},{0,0,0,1,0,0,0},{0,0,0,0,1,0,0},{0,0,0,0,0,1,0},{0,0,0,0,0,0,1}};
         I7.setValues(I7vals);
