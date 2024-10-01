@@ -1,4 +1,4 @@
-public class Matrix {
+public class Matrix {// real-values matrix class
     private int size;
     private double[][] values;
   
@@ -42,6 +42,7 @@ public class Matrix {
             }
             System.out.println("]");
         }
+        System.out.println();
     }
 
     public Matrix matMultiply(Matrix B){// multiply two matrices where A.matMultiply(B) = AB and B.matMultiply(A) = BA
@@ -146,4 +147,87 @@ public class Matrix {
         return inverseMatrix;
     }
 
+    public Matrix identity(int n){// produce nxn identity matrix
+        Matrix idMatrix = new Matrix(n);
+        double[][] values = new double[n][n];
+        for (int i=0; i<n; i++){
+            for (int j=0; j<n; j++){
+                if(i==j){values[i][j]=1;}
+                else{values[i][j]=0;}
+            }
+        }
+        idMatrix.setValues(values);
+        return idMatrix;
+    }
+
+    public Vector getCol(int i){// return column i of the matrix
+        Vector result = new Vector(this.size);
+        double[] resultValues = new double[this.size]; 
+        for (int j=0; j<this.size; j++){
+            resultValues[j] = this.values[j][i];
+        }
+        result.setValues(resultValues);
+        return result;
+    }
+
+    public Vector getRow(int i){// return row i of the matrix
+        Vector result = new Vector(this.size);
+        double[] resultValues = new double[this.size]; 
+        for (int j=0; j<this.size; j++){
+            resultValues[j] = this.values[i][j];
+        }
+        result.setValues(resultValues);
+        return result;
+    }
+
+    public void setCol(int i, Vector v){// return column i of the matrix
+        if (v.getSize() != this.size){
+            System.err.println("vector is not right size for matrix");
+        }
+        double[] newColumn = v.getvalues();
+        for (int j=0; j<this.size; j++){
+            this.values[i][j] = newColumn[j];
+        }
+    }
+    
+    public void setRow(int i, Vector v){// return column i of the matrix
+        if (v.getSize() != this.size){
+            System.err.println("vector is not right size for matrix");
+        }
+        double[] newRow = v.getvalues();
+        for (int j=0; j<this.size; j++){
+            this.values[j][i] = newRow[j];
+        }
+    }
+
+    public Matrix adjoint(){// calculate adjoint of the matrix AKA conjugate/hermitian transpose over C
+        Matrix result = new Matrix(this.size);
+        double[][] newValues = new double[this.size][this.size];
+        for (int i=0; i<this.size; i++){
+            for (int j=0; j<this.size; j++){
+                newValues[j][i] = this.values[i][j];// would also take complex conjugate here if working over C
+            }
+        }
+        result.setValues(newValues);
+        return result;
+    }
+
+    public boolean equals(Matrix B){// check two matrices are equal (allowing for 5d.p error)
+        if (this.size != B.getSize()){return false;}
+
+        double[][] Bvals = B.getValues();
+        for (int i=0; i<this.size; i++){
+            for (int j=0; j<this.size; j++){
+                if ((double)Math.round(this.values[i][j]*100000d)/100000d != 
+                    (double)Math.round(Bvals[i][j]*100000d)/100000d){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean diagonalisable(){// self-adjoint operator <-> symmetric matrix <-> diagonalisable
+        return (this.equals(this.adjoint()));
+    }
 }

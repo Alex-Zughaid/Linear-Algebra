@@ -2,17 +2,17 @@ public class Vector {
     private int size;
     private double[] values;
 
-    public static void main(String[] args){
-        Vector x = new Vector();
-        x.setSize(3);
-        double[] xvals = {1,2,3};
-        x.setValues(xvals);
-        x.print();
+    public Vector(int size){
+        this.size = size;
     }
 
     public void setSize(int newSize){
         this.size = newSize;
         this.values = null;// clear the values because size has changed
+    }
+
+    public int getSize(){
+        return this.size;
     }
 
     public void setValues(double[] newValues){
@@ -21,6 +21,10 @@ public class Vector {
             System.err.println("Wrong size array for the vector");
         }
         this.values = newValues;
+    }
+
+    public double[] getvalues(){
+        return this.values;
     }
 
     public void print(){// print a vector in a nice format
@@ -36,7 +40,7 @@ public class Vector {
         if (x.size != this.size){
             System.err.println("Vectors differ in size");
         }
-        Vector result = new Vector();
+        Vector result = new Vector(this.size);
         double[] resultValues = new double[this.size]; 
         result.setSize(this.size);
         for (int i = 0; i < this.size; i++){
@@ -47,7 +51,7 @@ public class Vector {
     }
 
     public Vector multiply(double x){
-        Vector result = new Vector();
+        Vector result = new Vector(this.size);
         double[] resultValues = new double[this.size]; 
         result.setSize(this.size);
         for (int i = 0; i < this.size; i++){
