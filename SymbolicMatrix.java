@@ -1,8 +1,8 @@
-public class Matrix {// real-values matrix class
+public class SymbolicMatrix {// real-values matrix class
     private int size;
-    private double[][] values;
+    private Polynomial[][] values;
   
-    public Matrix(int size){
+    public SymbolicMatrix(int size){
         this.setSize(size);
     }
     
@@ -15,7 +15,7 @@ public class Matrix {// real-values matrix class
         return this.size;
     }
 
-    public void setValues(double[][] newValues){
+    public void setValues(Polynomial[][] newValues){
         // first check new array is the right size
         if (newValues.length != this.size){
             System.err.println("Wrong size array for the matrix");
@@ -28,7 +28,7 @@ public class Matrix {// real-values matrix class
         this.values = newValues;
     }
 
-    public double[][] getValues(){
+    public Polynomial[][] getValues(){
         return this.values;
     }
 
@@ -36,8 +36,8 @@ public class Matrix {// real-values matrix class
         for (int i = 0; i < this.size; i++){
             System.out.print("[");
             for (int j = 0; j < this.size; j++){
-                double value = this.values[i][j];
-                System.out.print((double)Math.round(value * 1000d) / 1000d);
+                Polynomial value = this.values[i][j];
+                value.print();
                 System.out.print(" ");
             }
             System.out.println("]");

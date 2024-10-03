@@ -6,4 +6,9 @@ public class Complex {
         real = r;
         imag = i;
     }
+
+    public double[] getValues(){
+        double[] output = {this.real,this.imag};
+        return output;
+    } 
 }

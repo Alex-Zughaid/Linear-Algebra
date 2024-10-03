@@ -1,10 +1,8 @@
 public class Demo {
     public static void main(String[] args) throws Exception {
         System.out.println("A demo for how to use the Matrix class");
-        
-        Matrix I7 = new Matrix(7);
-        double[][] I7vals = {{1,0,0,0,0,0,0}, {0,1,0,0,0,0,0}, {0,0,1,0,0,0,0},{0,0,0,1,0,0,0},{0,0,0,0,1,0,0},{0,0,0,0,0,1,0},{0,0,0,0,0,0,1}};
-        I7.setValues(I7vals);
+
+        Matrix I7 = Matrix.identity(7);
         System.out.println("7x7 identity matrix:");
         I7.print();
        
@@ -25,7 +23,6 @@ public class Demo {
         Matrix product1 = A.matMultiply(inverseA);
         System.out.println(product1.equals(I7));
         Matrix product2 = inverseA.matMultiply(A);
-        product2.print();
         System.out.println(product2.equals(I7));
 
 
